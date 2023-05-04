@@ -1,0 +1,137 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom right, #6e0e8b, #ff69b4);
+}
+.container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  align-items: center;
+  justify-content: space-between;
+  height: 100vh;
+  overflow: hidden;
+   background: linear-gradient(to bottom right, #6e0e8b, #ff69b4);
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 4vw;
+  margin: 4vw;
+ background: linear-gradient(to bottom right, #6e0e8b, #ff69b4);
+  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
+}
+
+.login-form h2 {
+  margin-top: 0;
+  color:white;
+  padding:1vw;
+  font-size: xx-large;
+  font-weight: bolder;
+}
+.login-form h3{
+  margin-top: 0;
+  color:white;
+  padding-bottom:1vw;
+}
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color:white;
+}
+
+.form-group input {
+  width: 30vw;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+button[type='submit'] {
+  width: 100%;
+  padding: 10px;
+  background: #8b24ab;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+ 
+}
+
+button[type='submit']:hover {
+  background-color:  #ff69b4;
+  font-size: large;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:20px
+}
+
+.logo img {
+  width: 36vw;
+  height: auto;
+}
+.logo h2{
+  font-size:2vw;
+   color: #ffffff;
+   align-self: center;
+}
+.logo p{
+  color:rgb(218, 198, 198);
+  font-weight: bolder;
+  text-align: center;
+  padding: 1px;
+}
+.login-form h5{
+   color: #ffffff;
+   align-self: center;
+   padding: 12px 0 32px;
+   font-size: large;
+}
+a{
+    text-decoration: none;
+    color: #6e0e8b;
+   
+}
+a:hover{
+   font-size: larger;
+}
+ /* styles for mobile devices */
+@media only screen and (max-width: 767px) {
+
+
+.logo {
+ display: none;
+}
+.login-form {
+ width:80vw;
+}
+.form-group input {
+  width: 60vw;
+}
+.login-form h3{
+ width:100vw;
+}
+.login-form h5{
+   width: 85vw;
+}
+button[type='submit'] {
+  width: 70%;
+
+}
+}
