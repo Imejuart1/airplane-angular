@@ -1,0 +1,17 @@
+<nav class="pagination-container">
+    <div class="showing-container">{{ currentShowing }}</div>
+    <ul class="pagination">
+        <li *ngIf="startPage > 1" class="page-item">
+            <button class="page-link" (click)="setCurrentPage(1)">1</button>
+        </li>
+        <li *ngIf="startPage > 2" class="page-item">...</li>
+        <li *ngFor="let number of pageNumbers.slice(startPage - 1, endPage)" class="page-item">
+            <button [ngClass]="{ 'page-link': true, 'active': number === currentPage }"
+                (click)="setCurrentPage(number)">{{ number }}</button>
+        </li>
+        <li *ngIf="endPage < pageNumbers.length - 1" class="page-item">...</li>
+        <li *ngIf="endPage < pageNumbers.length" class="page-item">
+            <button class="page-link" (click)="setCurrentPage(pageNumbers.length)">{{ pageNumbers.length }}</button>
+        </li>
+    </ul>
+</nav>

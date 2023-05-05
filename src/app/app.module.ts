@@ -8,6 +8,8 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { LoginComponent } from './Pages/login/login.component';
 import { SignupComponent } from './Pages/signup/signup.component';
+import { HomeComponent } from './Pages/home/home.component';
+//import { PaginationComponent } from './pagination/pagination.component';
 
 
 @NgModule({
@@ -15,7 +17,7 @@ import { SignupComponent } from './Pages/signup/signup.component';
     LoginComponent,
     AppComponent,
     SignupComponent,
-    
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,6 +27,6 @@ import { SignupComponent } from './Pages/signup/signup.component';
     AngularFirestoreModule
   ],
   providers: [],
-  bootstrap: [ SignupComponent, LoginComponent ]
+  bootstrap: [ HomeComponent, SignupComponent, LoginComponent ]
 })
 export class AppModule { }
