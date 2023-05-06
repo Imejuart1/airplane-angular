@@ -1,22 +1,25 @@
 <div class="airport-counts">
-  <h2>Airport Summary</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Airport Code</th>
-        <th>Current Time (CST)</th>
-        <th>Departure Count</th>
-        <th>Arrival Count</th>
-       
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let airport of airportCounts.departure | keyvalue">
-        <td>{{ airport.key }}</td>
-        <td>{{ airportCounts.currentTime[airport.key] }}</td>
-        <td>{{ airport.value }}</td>
-        <td>{{ airportCounts.arrival[airport.key] || 0 }}</td>     
-      </tr>
-    </tbody>
-  </table>
+    <h2>RESULTS GOTTEN FROM OPEN SKY API, MADE WITH ANGULAR</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Airport Code</th>
+                <th>Current Time (CST)</th>
+                <th>Departure Count</th>
+                <th>Arrival Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr
+                *ngFor="let airport of airportCounts.departure | keyvalue | paginate: { itemsPerPage: 10, currentPage: p }">
+                <td>{{ airport.key }}</td>
+                <td>{{ airportCounts.currentTime[airport.key] }}</td>
+                <td>{{ airport.value }}</td>
+                <td>{{ airportCounts.arrival[airport.key] || 0 }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="pagination-container">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
 </div>

@@ -14,6 +14,10 @@ export class LoginComponent {
   password: string = '';
   success: string = '';
   constructor(private router: Router, private afAuth: AngularFireAuth) {}
+  
+    goToSignUp() {
+    this.router.navigate(['#signup']);
+  }
 
   handleLogin() {
     this.afAuth.signInWithEmailAndPassword(this.email, this.password)

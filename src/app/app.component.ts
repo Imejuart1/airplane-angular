@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'airplane-angular';
+  isLoggedIn: boolean = false; // initialize to false
 }

@@ -8,7 +8,6 @@ body {
   font-family: Arial, sans-serif;
    background: linear-gradient(to bottom right, #6e0e8b, #ff69b4);
   min-height: 100vh;
-  background-repeat: no-repeat;
   
 }
 
@@ -17,8 +16,8 @@ body {
   background-image: url("https://cdn.pixabay.com/photo/2014/08/26/22/56/plane-429196_960_720.jpg");
   background-size: cover;
   background-position: center center;
-  background-repeat: no-repeat;
   margin: 6rem 3rem 0 3rem;
+   min-height: 100vh;
 }
 
 .airport-counts h2 {
@@ -56,6 +55,12 @@ body {
 .airport-counts tr:nth-child(odd) {
   background-color: rgba(255, 255, 255, 0.6);
 }
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* adjust as needed */
+}
+
 
 @media only screen and (max-width: 768px) {
   .airport-counts table {
@@ -68,5 +73,6 @@ body {
   }
   .airport-counts th {
     font-size: small;
+    
   }
 }

@@ -9,6 +9,8 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { LoginComponent } from './Pages/login/login.component';
 import { SignupComponent } from './Pages/signup/signup.component';
 import { HomeComponent } from './Pages/home/home.component';
+import { NgxPaginationModule } from 'ngx-pagination'; // import the module
+
 //import { PaginationComponent } from './pagination/pagination.component';
 
 
@@ -24,9 +26,10 @@ import { HomeComponent } from './Pages/home/home.component';
     FormsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+     NgxPaginationModule // add the module to the imports array
   ],
   providers: [],
-  bootstrap: [ HomeComponent, SignupComponent, LoginComponent ]
+  bootstrap: [  HomeComponent, SignupComponent, LoginComponent ]
 })
 export class AppModule { }

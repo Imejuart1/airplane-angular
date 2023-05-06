@@ -13,8 +13,10 @@ export class HomeComponent implements OnInit {
     departure: {},
     arrival: {},
     currentTime: {}
-};
-
+  };
+  currentPage = 1;
+  itemsPerPage = 5;
+    p: number = 1;
 
   ngOnInit() {
     this.fetchData();
@@ -40,15 +42,16 @@ export class HomeComponent implements OnInit {
   }
 
   countAirports(flights: any[]) {
-   const departureCounts: {[key: string]: number} = {};
-  const arrivalCounts: {[key: string]: number} = {};
-  const airportFirstSeen: {[key: string]: number} = {};
-  const airportLastSeen: {[key: string]: number} = {};
+    const departureCounts: {[key: string]: number} = {};
+    const arrivalCounts: {[key: string]: number} = {};
+    const airportFirstSeen: {[key: string]: number} = {};
+    const airportLastSeen: {[key: string]: number} = {};
 
-interface AirportCurrentTime {
-  [key: string]: string;
-}
-const airportCurrentTime: AirportCurrentTime = {};
+    interface AirportCurrentTime {
+      [key: string]: string;
+    }
+    const airportCurrentTime: AirportCurrentTime = {};
+
     flights.forEach(flight => {
       const { icao24, firstSeen, lastSeen, estDepartureAirport, estArrivalAirport } = flight;
 
@@ -64,7 +67,6 @@ const airportCurrentTime: AirportCurrentTime = {};
       }
     });
 
-   
     Object.keys(airportFirstSeen).forEach(airportCode => {
       const earliestTime = airportFirstSeen[airportCode];
       const latestTime = airportLastSeen[airportCode];
@@ -75,5 +77,6 @@ const airportCurrentTime: AirportCurrentTime = {};
     });
 
     return { departure: departureCounts, arrival: arrivalCounts, currentTime: airportCurrentTime };
+
   }
 }
