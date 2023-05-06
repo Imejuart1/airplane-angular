@@ -1,21 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import axios from 'axios';
 import * as moment from 'moment-timezone';
-//import { Pagination } from '../../components/Pagination';
-
-interface AirportCounts {
-  departure: { [airportCode: string]: number };
-  arrival: { [airportCode: string]: number };
-  currentTime: { [airportCode: string]: string };
-}
-
-interface Flight {
-  icao24: string;
-  firstSeen: number;
-  lastSeen: number;
-  estDepartureAirport?: string;
-  estArrivalAirport?: string;
-}
 
 @Component({
   selector: 'app-home',
@@ -23,10 +8,13 @@ interface Flight {
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  flights: Flight[] = [];
-  airportCounts: AirportCounts = { departure: {}, arrival: {}, currentTime: {} };
-  currentPage = 1;
-  itemsPerPage = 10;
+  flights: any[] = [];
+  airportCounts: { departure: {[key: string]: number}, arrival: {[key: string]: number}, currentTime: {[key: string]: string} } = {
+    departure: {},
+    arrival: {},
+    currentTime: {}
+};
+
 
   ngOnInit() {
     this.fetchData();
@@ -51,12 +39,16 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  countAirports(flights: Flight[]) {
-    const departureCounts: { [airportCode: string]: number } = {};
-    const arrivalCounts: { [airportCode: string]: number } = {};
-    const airportFirstSeen: { [airportCode: string]: number } = {};
-    const airportLastSeen: { [airportCode: string]: number } = {};
+  countAirports(flights: any[]) {
+   const departureCounts: {[key: string]: number} = {};
+  const arrivalCounts: {[key: string]: number} = {};
+  const airportFirstSeen: {[key: string]: number} = {};
+  const airportLastSeen: {[key: string]: number} = {};
 
+interface AirportCurrentTime {
+  [key: string]: string;
+}
+const airportCurrentTime: AirportCurrentTime = {};
     flights.forEach(flight => {
       const { icao24, firstSeen, lastSeen, estDepartureAirport, estArrivalAirport } = flight;
 
@@ -72,14 +64,13 @@ export class HomeComponent implements OnInit {
       }
     });
 
-    // Calculate the current time at each airport based on the average of the first and last seen times
-    const airportCurrentTime: { [airportCode: string]: string } = {};
+   
     Object.keys(airportFirstSeen).forEach(airportCode => {
       const earliestTime = airportFirstSeen[airportCode];
       const latestTime = airportLastSeen[airportCode];
       const avgTime = Math.floor((earliestTime + latestTime) / 2);
       const cstTime = moment.tz(avgTime * 1000, 'America/Chicago');
-      const timeFormat = cstTime.hour() < 12 ? 'h:mm A' :'h:mm P';
+      const timeFormat = cstTime.hour() < 12 ? ' h:mm A' : ' h:mm P';
       airportCurrentTime[airportCode] = cstTime.format(timeFormat)  + ' CST';
     });
 

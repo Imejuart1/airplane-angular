@@ -1,25 +1,22 @@
 <div class="airport-counts">
-    <h2>RESULTS FROM OPENSKY NETWORK API</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>AIRPORT</th>
-                <th>TIME</th>
-                <th>ARRIVING</th>
-                <th>DEPARTING</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Map through the list of airport codes and display the corresponding counts -->
-            <tr *ngFor="let airportCode of Object.keys(airportCounts.departure || {})" [key]="airportCode">
-                <td>{{ airportCode }}</td>
-                <td>{{ airportCounts.currentTime[airportCode] || 0 }}</td>
-                <td>{{ airportCounts.arrival[airportCode] || 0 }}</td>
-                <td>{{ airportCounts.departure[airportCode] || 0 }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <!-- Render pagination component -->
-    <!--<app-pagination [itemsPerPage]="itemsPerPage" [totalItems]="Object.keys(airportCounts.departure || {}).length"
-        [currentPage]="currentPage" (setCurrentPage)="setCurrentPage($event)"></app-pagination>-->
+  <h2>Airport Summary</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Airport Code</th>
+        <th>Current Time (CST)</th>
+        <th>Departure Count</th>
+        <th>Arrival Count</th>
+       
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let airport of airportCounts.departure | keyvalue">
+        <td>{{ airport.key }}</td>
+        <td>{{ airportCounts.currentTime[airport.key] }}</td>
+        <td>{{ airport.value }}</td>
+        <td>{{ airportCounts.arrival[airport.key] || 0 }}</td>     
+      </tr>
+    </tbody>
+  </table>
 </div>
