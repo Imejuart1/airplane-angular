@@ -1,17 +1,18 @@
-<!-- app.component.html -->
+<nav class="navbar">
+  <h1>HAMOYE</h1>
+  <div class="navbar-links">
+    <a *ngIf="!isLoggedIn" routerLink="/signup">Sign Up</a>
+    <a *ngIf="!isLoggedIn" routerLink="/login">Login</a>
+  </div>
+  <div class="navbar-links navbar-links-right">
+  <button *ngIf="isLoggedIn" (click)="handleLogout()">Log Out</button>
 
- <!-- <app-top-navbar></app-top-navbar> add top nav bar component -->
+  </div>
+</nav>
 
-<div class="container">
-  <ng-container *ngIf="isLoggedIn; else login">
-    <app-home></app-home> <!-- render HomeComponent -->
-  </ng-container>
-  <ng-template #login>
-    <app-login></app-login> <!-- render LoginComponent -->  
-  </ng-template>
-  <ng-template #signup>
-    <app-signup></app-signup>
-  </ng-template>
-
-  
-</div>
+<ng-container *ngIf="isLoggedIn; else login">
+  <app-home></app-home>
+</ng-container>
+<ng-template #login>
+<app-login></app-login>
+</ng-template>

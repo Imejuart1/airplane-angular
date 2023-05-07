@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -10,16 +11,22 @@ import { LoginComponent } from './Pages/login/login.component';
 import { SignupComponent } from './Pages/signup/signup.component';
 import { HomeComponent } from './Pages/home/home.component';
 import { NgxPaginationModule } from 'ngx-pagination'; // import the module
-
+import { AuthGuard } from './services/AuthGuard';
 //import { PaginationComponent } from './pagination/pagination.component';
-
+const routes: Routes = [
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'signup', component: SignupComponent },
+  { path: 'login', component: LoginComponent }
+];
 
 @NgModule({
   declarations: [
-    LoginComponent,
+   
     AppComponent,
     SignupComponent,
     HomeComponent,
+     LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,9 +34,13 @@ import { NgxPaginationModule } from 'ngx-pagination'; // import the module
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-     NgxPaginationModule // add the module to the imports array
+     NgxPaginationModule,
+     RouterModule.forRoot(routes) // add the module to the imports array
+  ],
+  exports:[
+     RouterModule
   ],
   providers: [],
-  bootstrap: [  HomeComponent, SignupComponent, LoginComponent ]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

@@ -1,0 +1,31 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #eee;
+  height: 50px;
+  padding: 0 10px;
+}
+
+.navbar-links {
+  position:absolute;
+  right:0;
+}
+
+.navbar-links a {
+  color: #333;
+  text-decoration: none;
+  margin-right: 50px;
+}
+.navbar-links button {
+  color: #333;
+  text-decoration: none;
+  margin-right: 50px;
+}
+.navbar-links a:hover{
+    color:blue;
+    font-size: large;
+}
+.navbar-links-right {
+  margin-left: auto;
+}

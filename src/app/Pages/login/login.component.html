@@ -19,11 +19,9 @@
                 <input type="password" id="password" name="password" placeholder="Enter your password"
                     [(ngModel)]="password" />
             </div>
-            <h5>Don't have an account? <a routerLink="./signup">SIGN UP</a></h5>
+            <h5>Don't have an account? <a routerLink="/signup">SIGN UP</a></h5>
             <p>{{ success }}</p>
             <button type="submit" (click)="handleLogin()">Login</button>
         </form>
     </div>
 </div>
-
-<router-outlet></router-outlet>
