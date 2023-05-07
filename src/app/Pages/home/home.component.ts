@@ -1,3 +1,4 @@
+//This typescript is to  render the data from the api
 import { Component, OnInit } from '@angular/core';
 import axios from 'axios';
 import * as moment from 'moment-timezone';
