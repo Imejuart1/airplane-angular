@@ -24,6 +24,7 @@ export class LoginComponent {
         const user = userCredential.user;
          this.authService.setLoggedIn(true); // set logged-in status in your auth service
         this.success = 'Login successful!';
+        this.router.navigateByUrl('/home');
       })
       .catch(error => { 
         alert(error.message); 

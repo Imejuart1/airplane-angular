@@ -9,11 +9,10 @@
 
   </div>
 </nav>
+<router-outlet></router-outlet>
 
-<ng-container *ngIf="isLoggedIn; else login">
-  <app-home></app-home>
-</ng-container>
-<ng-template #login>
-<app-login></app-login>
 
-</ng-template>
+
+
+
+

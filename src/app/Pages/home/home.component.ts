@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import axios from 'axios';
 import * as moment from 'moment-timezone';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -23,6 +24,8 @@ export class HomeComponent implements OnInit {
   currentPage = 1;
   itemsPerPage = 5;
   p: number = 1;
+
+
 
   ngOnInit() {
     // Call fetchData method on component initialization and then every 1 second using setInterval method
@@ -89,4 +92,6 @@ export class HomeComponent implements OnInit {
     return { departure: departureCounts, arrival: arrivalCounts, currentTime: airportCurrentTime };
 
   }
+    
+  
 }

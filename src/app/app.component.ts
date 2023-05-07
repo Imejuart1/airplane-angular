@@ -1,6 +1,7 @@
 // Import necessary modules and services
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/Authservice'
+import { Router } from '@angular/router';
 
 // Declare the component metadata
 @Component({
@@ -10,7 +11,7 @@ import { AuthService } from './services/Authservice'
 })
 export class AppComponent implements OnInit {
   // Inject the AuthService into the component
-  constructor(private authService: AuthService) {}
+  constructor(private  router: Router, private authService: AuthService ) {}
 
   // Initialize the component on load
   ngOnInit() {
@@ -31,5 +32,6 @@ export class AppComponent implements OnInit {
   handleLogout() {
     // Set the logged-in status in the AuthService to false
     this.authService.setLoggedIn(false);
+    this.router.navigateByUrl('/login');
   }
 }
