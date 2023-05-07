@@ -1,4 +1,4 @@
-//This typescript is to  render the data from the api
+//This typescript is to  render the  from the api
 import { Component, OnInit } from '@angular/core';
 import axios from 'axios';
 import * as moment from 'moment-timezone';
@@ -9,17 +9,23 @@ import * as moment from 'moment-timezone';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  // Define class properties
   flights: any[] = [];
-  airportCounts: { departure: {[key: string]: number}, arrival: {[key: string]: number}, currentTime: {[key: string]: string} } = {
+  airportCounts: {
+    departure: { [key: string]: number },
+    arrival: { [key: string]: number },
+    currentTime: { [key: string]: string }
+  } = {
     departure: {},
     arrival: {},
     currentTime: {}
   };
   currentPage = 1;
   itemsPerPage = 5;
-    p: number = 1;
+  p: number = 1;
 
   ngOnInit() {
+    // Call fetchData method on component initialization and then every 1 second using setInterval method
     this.fetchData();
     setInterval(() => {
       this.fetchData();
@@ -27,6 +33,7 @@ export class HomeComponent implements OnInit {
   }
 
   async fetchData() {
+    // Get flight data from OpenSky API for the past hour and the next hour
     const now = Math.floor(Date.now() / 1000); // current Unix timestamp in seconds
     const begin = now - 3600; // 1 hour ago
     const end = now + 3600; // 1 hour from now
@@ -43,10 +50,11 @@ export class HomeComponent implements OnInit {
   }
 
   countAirports(flights: any[]) {
-    const departureCounts: {[key: string]: number} = {};
-    const arrivalCounts: {[key: string]: number} = {};
-    const airportFirstSeen: {[key: string]: number} = {};
-    const airportLastSeen: {[key: string]: number} = {};
+    // Count the number of flights departing from and arriving to each airport, and determine the current time at each airport
+    const departureCounts: { [key: string]: number } = {};
+    const arrivalCounts: { [key: string]: number } = {};
+    const airportFirstSeen: { [key: string]: number } = {};
+    const airportLastSeen: { [key: string]: number } = {};
 
     interface AirportCurrentTime {
       [key: string]: string;
@@ -68,6 +76,7 @@ export class HomeComponent implements OnInit {
       }
     });
 
+    // Determine the current time at each airport using the first and last seen times of flights
     Object.keys(airportFirstSeen).forEach(airportCode => {
       const earliestTime = airportFirstSeen[airportCode];
       const latestTime = airportLastSeen[airportCode];

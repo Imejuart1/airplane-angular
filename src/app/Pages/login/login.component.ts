@@ -17,7 +17,7 @@ export class LoginComponent {
   success: string = '';
    constructor(private router: Router, private afAuth: AngularFireAuth, private authService: AuthService) {}
   
-
+  //sign in users function from firebase
   handleLogin() {
     this.afAuth.signInWithEmailAndPassword(this.email, this.password)
       .then(userCredential => {
