@@ -4,9 +4,10 @@
         <thead>
             <tr>
                 <th>Airport Code</th>
-                <th>Current Time (CST)</th>
-                <th>Departure Count</th>
-                <th>Arrival Count</th>
+                <th>Time (CST)</th>
+                <th>Arriving</th>
+                <th>Departing</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -14,8 +15,9 @@
                 *ngFor="let airport of airportCounts.departure | keyvalue | paginate: { itemsPerPage: 10, currentPage: p }">
                 <td>{{ airport.key }}</td>
                 <td>{{ airportCounts.currentTime[airport.key] }}</td>
-                <td>{{ airport.value }}</td>
                 <td>{{ airportCounts.arrival[airport.key] || 0 }}</td>
+                <td>{{ airport.value }}</td>
+                
             </tr>
         </tbody>
     </table>
