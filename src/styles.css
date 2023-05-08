@@ -6,3 +6,6 @@ body {
   background: linear-gradient(to bottom, #0080ff, #1a8cff);
   background-repeat: no-repeat;
 }
+#__vercel {
+  display: none !important;
+}
