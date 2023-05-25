@@ -9,7 +9,9 @@ import * as moment from 'moment-timezone';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+
+
+  export class HomeComponent implements OnInit{
   // Define class properties
   flights: any[] = [];
   airportCounts: {
@@ -26,47 +28,19 @@ export class HomeComponent implements OnInit {
   p: number = 1;
 
 
-
-  ngOnInit() {
-    // Call fetchData method on component initialization and then every 1 second using setInterval method
-    this.fetchData();
-    setInterval(() => {
-      this.fetchData();
-    }, 1000);
-  }
-
-  async fetchData() {
-    // Get flight data from OpenSky API for the past hour and the next hour
-    const now = Math.floor(Date.now() / 1000); // current Unix timestamp in seconds
-    const begin = now - 3600; // 1 hour ago
-    const end = now + 3600; // 1 hour from now
-
-    try {
-      const res = await axios.get(`https://opensky-network.org/api/flights/all?begin=${begin}&end=${end}`);
-      const flights = res.data;
-      const counts = this.countAirports(flights);
-      this.flights = flights;
-      this.airportCounts = counts;
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
   countAirports(flights: any[]) {
     // Count the number of flights departing from and arriving to each airport, and determine the current time at each airport
+ 
     const departureCounts: { [key: string]: number } = {};
     const arrivalCounts: { [key: string]: number } = {};
     const airportFirstSeen: { [key: string]: number } = {};
     const airportLastSeen: { [key: string]: number } = {};
 
-    interface AirportCurrentTime {
-      [key: string]: string;
-    }
-    const airportCurrentTime: AirportCurrentTime = {};
-
+    const airportCurrentTime: {[key: string]: string} = {};
+   
     flights.forEach(flight => {
       const { icao24, firstSeen, lastSeen, estDepartureAirport, estArrivalAirport } = flight;
-
+        
       if (estDepartureAirport) {
         departureCounts[estDepartureAirport] = departureCounts[estDepartureAirport] + 1 || 1;
         airportFirstSeen[estDepartureAirport] = Math.min(firstSeen, airportFirstSeen[estDepartureAirport] || firstSeen);
@@ -93,5 +67,28 @@ export class HomeComponent implements OnInit {
 
   }
     
+  async fetchData() {
+    // Get flight data from OpenSky API for the past hour and the next hour
+    const now = Math.floor(Date.now() / 1000); // current Unix timestamp in seconds
+    const begin = now - 3600; // 1 hour ago
+    const end = now + 3600; // 1 hour from now
+
+    try {
+      const res = await axios.get(`https://opensky-network.org/api/flights/all?begin=${begin}&end=${end}`);
+      const flights = res.data;
+      this.airportCounts = this.countAirports(flights); 
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+    ngOnInit() {
+    // Call fetchData method on component initialization and then every 1 second using setInterval method
+    this.fetchData();
+    setInterval(() => {
+      this.fetchData();
+    }, 1000);
+  }
+
   
 }
